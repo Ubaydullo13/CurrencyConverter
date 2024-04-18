@@ -1,16 +1,31 @@
-import { createContext } from "react"
+import { createContext, useState, ReactNode } from "react"
 
-export const CurrencyContext = createContext()
+interface CurrencyContextType {
+    fromCurrency: string;
+    setFromCurrency: (currency: string) => void;
+    toCurrency: string;
+    setToCurrency: (currency: string) => void;
+    firstAmount: string;
+    setFirstAmount: (amount: string) => void;
+}
 
-const CurrencyProvider = ({children}) => {
-    const [fromCurrency, setFromCurrency] = useState("")
-    const [toCurrency, setToCurrency] = useState("")
+export const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined)
 
-    const value = {
+interface CurrencyProviderProps {
+    children: ReactNode;
+}
+
+const CurrencyProvider = ({children}): CurrencyProviderProps => {
+    const [fromCurrency, setFromCurrency] = useState<string>("🇺🇸 USD - United States");
+    const [toCurrency, setToCurrency] = useState<string>("🇦🇺 AUD - Australia");
+    const [firstAmount, setFirstAmount] = useState<string>("");  
+    const value: CurrencyContextType = {
         fromCurrency,
         setFromCurrency,
         toCurrency,
-        setToCurrency
+        setToCurrency,
+        firstAmount,
+        setFirstAmount
     };
   return (
     <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>

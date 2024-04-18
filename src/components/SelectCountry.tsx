@@ -24,7 +24,7 @@ const dataCountries = dataFilter.map(item => {
     return `${item.flag} ${Object.keys(item.currencies)[0]} - ${item.name.common}` 
 });
 
-console.log(dataCountries);
+// console.log(dataCountries);
 
 
 
@@ -32,6 +32,7 @@ console.log(dataCountries);
     <Grid item xs={12} md={3}>
         <Autocomplete 
         value={value}
+        disableClearable
         onChange={(event, newValue) =>{
             setValue(newValue);
         }}
