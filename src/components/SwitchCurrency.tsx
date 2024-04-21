@@ -1,7 +1,7 @@
 import { Button, Grid } from '@mui/material'
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows"
 import { useContext } from 'react'
-import { CurrencyContext } from '../context/CurrencyContext'
+import { CurrencyContext, CurrencyContextType } from '../context/CurrencyContext'
 
 const SwitchCurrency = () => {
     const {
@@ -9,7 +9,7 @@ const SwitchCurrency = () => {
         setFromCurrency,
         toCurrency,
         setToCurrency,
-    } = useContext(CurrencyContext)
+    } = useContext<CurrencyContextType>(CurrencyContext)
 
     const handleSwitch = () => {
            setFromCurrency(toCurrency);

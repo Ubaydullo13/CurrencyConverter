@@ -2,8 +2,8 @@ import { Box, Container, Grid, Typography } from '@mui/material'
 import InputAmount from './components/InputAmount'
 import SelectCountry from './components/SelectCountry'
 import SwitchCurrency from './components/SwitchCurrency'
-import { useContext, useEffect, useState } from 'react'
-import { CurrencyContext } from './context/CurrencyContext'
+import React, { useContext, useEffect, useState } from 'react'
+import { CurrencyContext, CurrencyContextType } from './context/CurrencyContext'
 
 function App() {
 const {
@@ -13,11 +13,11 @@ const {
     setToCurrency,
     firstAmount,
     setFirstAmount
-} = useContext(CurrencyContext)
+} = useContext<CurrencyContextType>(CurrencyContext)
 
-const [resultCurrency, setResultCurrency] = useState(0);
-const codeFromCurrency = fromCurrency.split(" ")[1];
-const codeToCurrency = toCurrency.split(" ")[1];
+const [resultCurrency, setResultCurrency] = useState<number>(0);
+const codeFromCurrency: string = fromCurrency.split(" ")[1];
+const codeToCurrency: string = toCurrency.split(" ")[1];
 
 console.log(resultCurrency);
 
@@ -46,7 +46,7 @@ useEffect(() => {
   }
 }, [firstAmount, fromCurrency, toCurrency]);
 
-  const boxStyles = {
+  const boxStyles: React.CSSProperties = {
     background: "#fdfdfd",
     marginTop: "10rem",
     textAlign: "center",
@@ -60,7 +60,7 @@ useEffect(() => {
 
   return (
     <Container maxWidth="md" sx={boxStyles}>
-      <Typography variant='h5' sx={{marginBottom: "2rem"}}>Stay Ahead with Accurate Conversions</Typography>
+      <Typography variant='h5' sx={{marginBottom: "3rem", fontSize: "30px", fontWeight: "500"}}>Effortless Currency Conversions for You</Typography>
       <Grid container spacing={2}>
         <InputAmount/>
         <SelectCountry value= {fromCurrency} setValue={setFromCurrency} label="From"/>
@@ -69,11 +69,13 @@ useEffect(() => {
       </Grid>
 
       {firstAmount ? (
-          <Box sx={{textAlign: "left", marginTop: "1rem"}}>
-            <Typography>{firstAmount} {fromCurrency} = </Typography>
-            <Typography variant='h5' sx={{marginTop: "5px", fontWeight: "bold"}}>{resultCurrency*firstAmount} {toCurrency}</Typography>
-          </Box>  
-      ) : ""}
+  <Box sx={{ textAlign: "left", marginTop: "1rem" }}>
+    <Typography sx={{fontSize: "18px"}}>{firstAmount} {fromCurrency} = </Typography>
+    <Typography variant='h5' sx={{ marginTop: "5px", fontWeight: "bold" }}>
+      {(parseFloat(firstAmount) * resultCurrency).toFixed(2)} {toCurrency}
+    </Typography>
+  </Box>
+) : ""}
     </Container>
   )
 }

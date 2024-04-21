@@ -1,9 +1,9 @@
 import { Grid, InputAdornment, TextField } from "@mui/material";
 import { useContext } from "react";
-import { CurrencyContext } from "../context/CurrencyContext";
+import { CurrencyContext, CurrencyContextType } from "../context/CurrencyContext";
 
 const InputAmount = () => {
-  const { firstAmount, setFirstAmount } = useContext(CurrencyContext);
+  const { firstAmount, setFirstAmount } = useContext<CurrencyContextType>(CurrencyContext);
   return (
     <Grid item xs={12} md>
       <TextField

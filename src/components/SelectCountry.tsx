@@ -1,7 +1,7 @@
 import { Autocomplete, Grid, Skeleton, TextField } from '@mui/material'
 import useFetch from '../hooks/useFetch'
 
-const SelectCountry = (props) => {
+const SelectCountry = (props: { value: string, setValue: (value: string) => void, label: string }) => {
 
 const {value, setValue, label} = props;
 
